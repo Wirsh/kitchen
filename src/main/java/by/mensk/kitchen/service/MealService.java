@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface MealService {
 
-    List<Product> getIngridients();
+    List<Product> getIngridients(Integer mealId);
 //    void  addMeal();
     Integer getAmount(Integer id);
     Meal setPortionsNum(Integer id, Integer amount);
@@ -20,4 +20,11 @@ public interface MealService {
 
 
     Meal findById(Integer id);
+
+    Meal updateMeal(Meal meal);
+
+    List<MealBean> getMealBeansList();
+    List<Meal> getMealList();
+
+    MealBean getMealBean(Integer id);
 }

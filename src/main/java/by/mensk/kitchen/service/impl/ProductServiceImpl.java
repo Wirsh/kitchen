@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Data
 @Service
@@ -21,7 +22,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product addProduct(String name, Double weight) {
-        Product newProduct = new Product(name, weight);
+        Product newProduct = new Product();
         return repository.save(newProduct);
     }
 
@@ -34,19 +35,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product updProduct(Product product) {
         Product productFromDb = repository.findById(product.getId()).orElse(null);
-         if(Objects.nonNull(productFromDb)&& product.getName()!=null){
-             productFromDb.setName(product.getName());
-             productFromDb.setWeight(product.getWeight());
+        if (Objects.nonNull(productFromDb) && product.getName() != null) {
+            productFromDb.setName(product.getName());
+            productFromDb.setWeight(product.getWeight());
 
-         }
+        }
         return repository.save(productFromDb);
-    }
-
-    @Override
-    public List<Product> getProductsList() {
-        List<Product> products = new ArrayList<>();
-        repository.findAll().forEach(products::add);
-        return products;
     }
 
 
@@ -60,5 +54,59 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProduct(Integer id) {
         return repository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<ProductBean> getProductsBeansByIdIn(List<Integer> collect) {
+        List<ProductBean> productBeans = new ArrayList<>();
+        ProductMapper productMapper = new ProductMapper();
+        repository.findAllById(collect)
+                .stream()
+                .forEach(product -> productBeans.add(productMapper.productToProductBean(product)) );
+        return productBeans;
+    }
+
+    @Override
+    public List<ProductBean> getProductsBeansList() {
+        List<ProductBean> productBeans = new ArrayList<>();
+        ProductMapper productMapper = new ProductMapper();
+        repository.findAll()
+                .stream()
+                .forEach(product -> productBeans.add(productMapper.productToProductBean(product)) );
+        return productBeans;
+    }
+
+    @Override
+    public List<Product> getProductsByIdIn(List<Integer> collect) {
+        return repository.findAllById(collect);
+    }
+
+    @Override
+    public List<Product> getProductsList(List<ProductBean> products) {
+        List<Product> productList = products
+                .stream()
+                .map(ProductMapper::productBeanToProduct)
+                .toList();
+        return productList;
+    }
+
+    @Override
+    public List<Product> getUsedProductsList(List<ProductBean> productBeansList) {
+        ProductMapper productMapper = new ProductMapper();
+        List<Product> products = null;
+        productBeansList
+                .stream()
+                .filter(ProductBean::getIsUsed)
+                .forEach(productBean -> products.add(productMapper.productBeanToProduct(productBean)));
+        return repository.findAllById(products
+                .stream()
+                .map(Product::getId)
+                .collect(Collectors.toList()));
+    }
+    @Override
+    public List<Product> getProductsList() {
+        List<Product> products = new ArrayList<>();
+        repository.findAll().forEach(products::add);
+        return products;
     }
 }

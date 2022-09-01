@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="meal")
+@Table(uniqueConstraints = { @UniqueConstraint(name = "meal", columnNames = { "name" }) })
 public class Meal {
     @Id
     @GeneratedValue(strategy =  GenerationType.AUTO)
@@ -22,6 +22,8 @@ public class Meal {
     private  String  category;
     @Column(name ="amount")
     private Integer amount;
+    @Column(name ="weight")
+    private Double weight;
     @OneToMany
     private List<Product> products;
 }

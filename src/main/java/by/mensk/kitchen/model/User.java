@@ -16,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 public class User {
+    //todo private fields
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id")

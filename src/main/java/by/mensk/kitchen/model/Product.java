@@ -4,7 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -19,11 +20,6 @@ public class Product {
     @Column(name ="weight")
     private Double weight;
 
-    public Product(String name, Double weight) {
-        this.name = name;
-        this.weight = weight;
-
-    }
 
 
 }

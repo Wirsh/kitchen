@@ -11,6 +11,7 @@ public class MealMapper {
         mealBean.setCategory(mealBean.getCategory());
         mealBean.setProducts(meal.getProducts());
         mealBean.setType(meal.getType());
+        mealBean.setWeight(mealBean.getWeight());
         return mealBean;
     }
     public Meal mealBeanToMeal(MealBean mealBean){
@@ -20,6 +21,7 @@ public class MealMapper {
         meal.setCategory(mealBean.getCategory());
         meal.setProducts(mealBean.getProducts());
         meal.setType(mealBean.getType());
+        meal.setWeight(mealBean.getWeight());
         return meal;
     }
 }

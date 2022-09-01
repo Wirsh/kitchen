@@ -7,18 +7,24 @@ import by.mensk.kitchen.model.Product;
 import by.mensk.kitchen.repository.MealRepository;
 import by.mensk.kitchen.repository.ProductRepository;
 import by.mensk.kitchen.service.MealService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
 @Service
 public class MealServiceImpl implements MealService {
+    @Autowired
     private MealRepository repository;
-    private MealService service;
+    @Autowired
     private ProductRepository productRepository;
 
     @Override
-    public List<Product> getIngridients() {
-        return productRepository.findAll();
+    public List<Product> getIngridients(Integer mealId) {
+        MealBean mealBean = getMealBean(mealId);
+        return mealBean != null ? mealBean.getProducts() : null;
     }
 
     @Override
@@ -38,7 +44,7 @@ public class MealServiceImpl implements MealService {
     @Override
     public Meal createMeal(Meal meal) {
         Meal createdMeal = null;
-        if (meal.getName() != null && !meal.getProducts().isEmpty()) {
+        if (meal.getName() != null) {
             createdMeal = repository.save(meal);
         }
         return createdMeal;
@@ -54,5 +60,37 @@ public class MealServiceImpl implements MealService {
     @Override
     public Meal findById(Integer id) {
         return repository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Meal updateMeal(Meal meal) {
+        Meal mealFromDb = repository.findById(meal.getId()).orElse(null);
+        if (Objects.nonNull(mealFromDb) && meal.getName() != null) {
+            mealFromDb.setName(meal.getName());
+            mealFromDb.setType(meal.getType());
+            mealFromDb.setProducts(meal.getProducts());
+            mealFromDb.setCategory(meal.getCategory());
+            mealFromDb.setAmount(meal.getAmount());
+
+        }
+        return repository.save(mealFromDb);
+
+    }
+
+    @Override
+    public List<MealBean> getMealBeansList() {
+        return null;
+    }
+
+    @Override
+    public List<Meal> getMealList() {
+        return repository.findAll();
+    }
+
+    @Override
+    public MealBean getMealBean(Integer id) {
+        MealMapper mapper = new MealMapper();
+        MealBean mealBean = mapper.mealToMealBean(repository.findById(id).orElse(null));
+        return mealBean;
     }
 }

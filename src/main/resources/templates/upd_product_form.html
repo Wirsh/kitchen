@@ -10,6 +10,7 @@
 
 <body>
 <div class="container">
+
     <form class="form-signin" method="POST" th:object="${product_to_update}" th:action="@{/update_product/{id}(id=${product_to_update.id})}">
         <h2 class="form-signin-heading">Update product</h2>
         <div class="form-group">

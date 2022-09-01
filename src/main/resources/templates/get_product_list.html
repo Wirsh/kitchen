@@ -20,9 +20,11 @@
             <div th:switch="${products}" class="container my-5">
                 <p class="my-5">
                     <a href="/add_product_form" class="btn btn-primary"><i
-                            class="fas fa-user-plus ml-2">Add Product</i></a>
-
+                            class="fas fa-user-plus ml-2">Add  new product</i></a>
+                    <a href="/add_meal_form" class="btn btn-primary"><i
+                            class="fas fa-user-plus ml-2">Add  new meal</i></a>
                 </p>
+
                 <div class="col-md-10">
                     <h2 th:case="null">No Products yet!</h2>
                     <div th:case="*">

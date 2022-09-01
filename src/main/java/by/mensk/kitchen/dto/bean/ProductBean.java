@@ -12,4 +12,5 @@ import javax.persistence.*;
 public class ProductBean {
     private  String  name;
     private Double weight;
+    private Boolean isUsed;
 }

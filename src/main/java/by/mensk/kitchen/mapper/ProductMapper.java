@@ -11,7 +11,7 @@ public class ProductMapper {
     }
 
 
-    public Product productBeanToProduct(ProductBean productBean){
+    public static Product productBeanToProduct(ProductBean productBean){
         Product product = new Product();
         product.setName(productBean.getName());
         return product;
