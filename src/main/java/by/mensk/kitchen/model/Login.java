@@ -17,9 +17,9 @@ public class Login {
     @Column(name ="Id")
     private Integer id;
     @Column(name="login")
-    String login = null;
+    String login;
     @Column(name= "pass")
-    String pass = null;
+    String pass;
 
 
 }

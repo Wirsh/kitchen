@@ -24,6 +24,6 @@ public class Meal {
     private Integer amount;
     @Column(name ="weight")
     private Double weight;
-    @OneToMany
+    @ManyToMany()
     private List<Product> products;
 }
