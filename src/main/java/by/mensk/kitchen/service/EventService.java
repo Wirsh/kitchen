@@ -1,8 +1,7 @@
 package by.mensk.kitchen.service;
 
-import by.mensk.kitchen.model.Meal;
 import by.mensk.kitchen.model.Event;
-import org.springframework.stereotype.Service;
+import by.mensk.kitchen.model.Meal;
 
 import java.util.Date;
 import java.util.List;

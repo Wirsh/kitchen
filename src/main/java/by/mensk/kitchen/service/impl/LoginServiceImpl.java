@@ -3,10 +3,8 @@ package by.mensk.kitchen.service.impl;
 import by.mensk.kitchen.dto.bean.LoginInfo;
 import by.mensk.kitchen.dto.bean.UserBean;
 import by.mensk.kitchen.mapper.UserMapper;
-import by.mensk.kitchen.model.User;
 import by.mensk.kitchen.repository.UserRepository;
 import by.mensk.kitchen.service.LoginService;
-import by.mensk.kitchen.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

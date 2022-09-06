@@ -2,10 +2,7 @@ package by.mensk.kitchen.service;
 
 import by.mensk.kitchen.dto.bean.CreateUserBean;
 import by.mensk.kitchen.enums.UserType;
-import by.mensk.kitchen.model.Product;
 import by.mensk.kitchen.model.User;
-import org.apache.xmlbeans.impl.xb.xsdschema.Attribute;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
