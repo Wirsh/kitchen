@@ -1,7 +1,7 @@
 package by.mensk.kitchen.service.impl;
 
-import by.mensk.kitchen.model.Meal;
 import by.mensk.kitchen.model.Event;
+import by.mensk.kitchen.model.Meal;
 import by.mensk.kitchen.repository.EventRepository;
 import by.mensk.kitchen.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,7 @@ public class EventServiceImpl implements EventService {
     public List<Meal> getMenu(Integer id) {
         List<Meal> myMealOnThitIvent = null;//todo get by id
         Optional<Event> event = repository.findById(id);
-        if (!event.isPresent()) {
+        if (event.isPresent()) {
             myMealOnThitIvent = event.get().getMenu();
         }
         return myMealOnThitIvent;

@@ -18,7 +18,8 @@ public class UserController {
 
     @PostMapping("/add_user")
     public User addUser(@RequestBody User user) {
-        return userService.addUser(user.userType,user.name,user.lastName,user.phone,user.email);
+        return userService.addUser(user.userType, user.name, user.lastName, user.phone, user.email); //todo WTF?
+        //todo send all object to addUser(user);
     }
 
     @GetMapping("/get_users_list")
@@ -26,14 +27,12 @@ public class UserController {
         return userService.getAllUsers();
 
     }
+
     @PutMapping("/update_user{id}")
-    public User updUser(@PathVariable(name = "id") Integer id){
+    public User updUser(@PathVariable(name = "id") Integer id) {
         User userToUpd = userService.getUser(id);
-
-
 //      todo   return userService.updUser(userToUpd,);
-
-        return  null;
+        return null;
 
     }
 
@@ -48,10 +47,7 @@ public class UserController {
         LoginInfo newLogin = new LoginInfo(newUser.getEmail(), newUser.getPass());
         model.addAttribute("info", newLogin);
         model.addAttribute("user", user);
-
         return "welcome";
     }
-
-
-    }
+}
 
